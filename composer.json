@@ -1,0 +1,14 @@
+{
+    "name": "archette/currency",
+    "description": "Implementation of rixafy/currency to Nette Framework",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rixafy",
+            "email": "rixafy@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
