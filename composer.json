@@ -12,5 +12,15 @@
     "minimum-stability": "dev",
     "require": {
         "rixafy/currency": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rixafy\\Currency\\": "src"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "7.1"
+        }
     }
 }
