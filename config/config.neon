@@ -2,9 +2,6 @@ extensions:
     archette.currency: Archette\Currency\CurrencyExtension
 
 services:
-    currencyConfig:
-        class: Rixafy\Currency\CurrencyConfig
-
     currencyFacade:
         class: Rixafy\Currency\CurrencyFacade
 
@@ -16,3 +13,8 @@ services:
 
     currencyUpdateCommand:
         class: Rixafy\Currency\Command\CurrencyUpdateCommand
+
+# Example configuration, copy this section to your config.neon
+archette.currency:
+    fixerIoApiKey: undefined
+    baseCurrency: EUR
