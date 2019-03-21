@@ -11,7 +11,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "rixafy/currency": "dev-master"
+        "rixafy/currency": "dev-master",
+        "nette/di": "^2.4"
     },
     "autoload": {
         "psr-4": {
