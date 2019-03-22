@@ -14,6 +14,11 @@ class CurrencyExtension extends \Nette\DI\CompilerExtension
         'baseCurrency' => 'EUR'
     ];
 
+    public function beforeCompile()
+    {
+        //TODO: Find all late engines and call $this->>addFilter
+    }
+
     public function loadConfiguration()
     {
         $this->validateConfig($this->defaults);
@@ -23,5 +28,10 @@ class CurrencyExtension extends \Nette\DI\CompilerExtension
             ->addSetup('setApiKey', [$this->config['apiKey']])
             ->addSetup('setApiService', [$this->config['apiService']])
             ->addSetup('setBaseCurrency', [$this->config['baseCurrency']]);
+    }
+
+    private function addFilter()
+    {
+        //TODO: Add filter to all late engines
     }
 }
