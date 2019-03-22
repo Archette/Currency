@@ -1,6 +1,10 @@
 extensions:
     archette.currency: Archette\Currency\CurrencyExtension
 
+orm.annotations:
+    paths:
+        - vendor/rixafy/currency
+
 services:
     currencyFacade:
         class: Rixafy\Currency\CurrencyFacade
