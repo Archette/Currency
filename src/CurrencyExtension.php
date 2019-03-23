@@ -4,7 +4,11 @@ declare(strict_types=1);
 
 namespace Archette\Currency;
 
+use Rixafy\Currency\Command\CurrencyUpdateCommand;
 use Rixafy\Currency\CurrencyConfig;
+use Rixafy\Currency\CurrencyFacade;
+use Rixafy\Currency\CurrencyFactory;
+use Rixafy\Currency\CurrencyRepository;
 
 class CurrencyExtension extends \Nette\DI\CompilerExtension
 {
@@ -16,7 +20,8 @@ class CurrencyExtension extends \Nette\DI\CompilerExtension
 
     public function beforeCompile()
     {
-        //TODO: Find all late engines and call $this->>addFilter
+        $this->getContainerBuilder()->getDefinitionByType(\Doctrine\Common\Persistence\Mapping\Driver\AnnotationDriver::class)
+            ->addSetup('addPaths', [['vendor/rixafy/blog']]);
     }
 
     public function loadConfiguration()
@@ -28,10 +33,17 @@ class CurrencyExtension extends \Nette\DI\CompilerExtension
             ->addSetup('setApiKey', [$this->config['apiKey']])
             ->addSetup('setApiService', [$this->config['apiService']])
             ->addSetup('setBaseCurrency', [$this->config['baseCurrency']]);
-    }
 
-    private function addFilter()
-    {
-        //TODO: Add filter to all late engines
+        $this->getContainerBuilder()->addDefinition($this->prefix('rixafy.currencyFacade'))
+            ->setFactory(CurrencyFacade::class);
+
+        $this->getContainerBuilder()->addDefinition($this->prefix('rixafy.currencyRepository'))
+            ->setFactory(CurrencyRepository::class);
+
+        $this->getContainerBuilder()->addDefinition($this->prefix('rixafy.currencyFactory'))
+            ->setFactory(CurrencyFactory::class);
+
+        $this->getContainerBuilder()->addDefinition($this->prefix('rixafy.currencyUpdateCommand'))
+            ->setFactory(CurrencyUpdateCommand::class);
     }
 }
