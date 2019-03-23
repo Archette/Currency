@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Rixafy\\Currency\\": "src"
+            "Archette\\Currency\\": "src"
         }
     },
     "config": {
