@@ -28,7 +28,7 @@ class CurrencyExtension extends \Nette\DI\CompilerExtension
     {
         $this->validateConfig($this->defaults);
 
-        $this->getContainerBuilder()->addDefinition($this->prefix('currencyConfig'))
+        $this->getContainerBuilder()->addDefinition($this->prefix('rixafy.currencyConfig'))
             ->setFactory(CurrencyConfig::class)
             ->addSetup('setApiKey', [$this->config['apiKey']])
             ->addSetup('setApiService', [$this->config['apiService']])
