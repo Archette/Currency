@@ -21,7 +21,7 @@ class CurrencyExtension extends \Nette\DI\CompilerExtension
     public function beforeCompile()
     {
         $this->getContainerBuilder()->getDefinitionByType(\Doctrine\Common\Persistence\Mapping\Driver\AnnotationDriver::class)
-            ->addSetup('addPaths', [['vendor/rixafy/blog']]);
+            ->addSetup('addPaths', [['vendor/rixafy/currency']]);
     }
 
     public function loadConfiguration()
