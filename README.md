@@ -47,4 +47,6 @@ decimal point, hundred and thousand separator, symbol and code is saved in DB (t
 
 # Important
 
-This extension requires implementation Doctrine ORM in Nette Framework - https://github.com/nettrine/orm.
+Extension requires implementation of Doctrine ORM in Nette Framework - https://github.com/nettrine/orm.
+
+Extension requires implementation of symfony/console in Nette Framework - https://github.com/contributte/console.
