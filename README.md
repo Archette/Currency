@@ -25,15 +25,15 @@ Basic examples for working with extension
 
 ## Converting
 ```PHP
-$eur = $this->>currencyFacade->getByCode('EUR'); // returns Currency instance
-$usd = $this->>currencyFacade->getByCode('USD'); // returns Currency instance
+$eur = $this->currencyFacade->getByCode('EUR'); // returns Currency instance
+$usd = $this->currencyFacade->getByCode('USD'); // returns Currency instance
 
 $eur->convertFrom($usd, 100); // converts 100 USD to EUR, returns float
 $eur->convertTo($usd, 100); // converts 100 EUR to USD, returns float
 ```
 
 ## Latte filters
-There are 3 basic latte filters, "currency", "currencyCode" and "currencyNumber", all 3 filters have same parameters, $amount and $currencyCode (optional)
+There are 3 basic latte filters, **currency**, **currencyCode** and **currencyNumber**, all 3 filters have same parameters, $amount and $currencyCode (optional)
 
 ``{45.54|currency}`` will display ``$45.54`` if default or provided (CurrencyProvider::provide('USD')) currency is USD
 
