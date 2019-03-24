@@ -13,7 +13,7 @@
     "require": {
         "rixafy/currency": "dev-master",
         "nette/di": "^2.4",
-        "nette/application": "^3.0@dev"
+        "nette/application": "^2.4.4"
     },
     "autoload": {
         "psr-4": {
