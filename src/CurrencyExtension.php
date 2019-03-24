@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Archette\Currency;
 
+use Archette\Currency\LatteFilter\CurrencyCodeFilter;
 use Archette\Currency\LatteFilter\CurrencyStringFilter;
 use Nette\Bridges\ApplicationLatte\ILatteFactory;
 use Rixafy\Currency\Command\CurrencyUpdateCommand;
@@ -52,10 +53,16 @@ class CurrencyExtension extends \Nette\DI\CompilerExtension
         $this->getContainerBuilder()->addDefinition($this->prefix('rixafy.currencyProvider'))
             ->setFactory(CurrencyProvider::class);
 
-        $stringFilter = $this->getContainerBuilder()->addDefinition($this->prefix('archette.currencyDisplayFilter'))
+        $stringFilter = $this->getContainerBuilder()->addDefinition($this->prefix('archette.currencyStringFilter'))
             ->setFactory(CurrencyStringFilter::class);
 
         $this->getContainerBuilder()->getDefinitionByType(ILatteFactory::class)
             ->addSetup('addFilter', ['currency', $stringFilter]);
+
+        $codeFilter = $this->getContainerBuilder()->addDefinition($this->prefix('archette.currencyCodeFilter'))
+            ->setFactory(CurrencyCodeFilter::class);
+
+        $this->getContainerBuilder()->getDefinitionByType(ILatteFactory::class)
+            ->addSetup('addFilter', ['currencyCode', $codeFilter]);
     }
 }
