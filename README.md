@@ -1,5 +1,5 @@
 # Currency
-💱 CRUD model rixafy/currency ported to @nette framework.
+💱 CRUD model [rixafy/currency](https://github.com/Rixafy/Currency) ported to @nette framework.
 
 # Installation
 ```
