@@ -1,4 +1,4 @@
-# Blog
+# Currency
 💱 CRUD model rixafy/currency ported to @nette framework.
 
 # Installation
