@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Archette\Currency;
 
-use Archette\Currency\LatteFilter\CurrencyCodeFilter;
-use Archette\Currency\LatteFilter\CurrencyNumberFilter;
-use Archette\Currency\LatteFilter\CurrencyStringFilter;
+use Archette\Currency\Latte\CurrencyCodeFilter;
+use Archette\Currency\Latte\CurrencyNumberFilter;
+use Archette\Currency\Latte\CurrencyStringFilter;
 use Nette\Bridges\ApplicationLatte\ILatteFactory;
 use Rixafy\Currency\Command\CurrencyUpdateCommand;
 use Rixafy\Currency\CurrencyConfig;

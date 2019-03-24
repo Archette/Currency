@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Archette\Currency\LatteFilter;
+namespace Archette\Currency\Latte;
 
 use Rixafy\Currency\CurrencyFacade;
 use Rixafy\Currency\CurrencyProvider;
