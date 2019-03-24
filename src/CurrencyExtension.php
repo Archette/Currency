@@ -33,40 +33,40 @@ class CurrencyExtension extends \Nette\DI\CompilerExtension
     {
         $this->validateConfig($this->defaults);
 
-        $this->getContainerBuilder()->addDefinition($this->prefix('rixafy.currencyConfig'))
+        $this->getContainerBuilder()->addDefinition($this->prefix('currencyConfig'))
             ->setFactory(CurrencyConfig::class)
             ->addSetup('setApiKey', [$this->config['apiKey']])
             ->addSetup('setApiService', [$this->config['apiService']])
             ->addSetup('setBaseCurrency', [$this->config['baseCurrency']]);
 
-        $this->getContainerBuilder()->addDefinition($this->prefix('rixafy.currencyFacade'))
+        $this->getContainerBuilder()->addDefinition($this->prefix('currencyFacade'))
             ->setFactory(CurrencyFacade::class);
 
-        $this->getContainerBuilder()->addDefinition($this->prefix('rixafy.currencyRepository'))
+        $this->getContainerBuilder()->addDefinition($this->prefix('currencyRepository'))
             ->setFactory(CurrencyRepository::class);
 
-        $this->getContainerBuilder()->addDefinition($this->prefix('rixafy.currencyFactory'))
+        $this->getContainerBuilder()->addDefinition($this->prefix('currencyFactory'))
             ->setFactory(CurrencyFactory::class);
 
-        $this->getContainerBuilder()->addDefinition($this->prefix('rixafy.currencyUpdateCommand'))
+        $this->getContainerBuilder()->addDefinition($this->prefix('currencyUpdateCommand'))
             ->setFactory(CurrencyUpdateCommand::class);
 
-        $this->getContainerBuilder()->addDefinition($this->prefix('rixafy.currencyProvider'))
+        $this->getContainerBuilder()->addDefinition($this->prefix('currencyProvider'))
             ->setFactory(CurrencyProvider::class);
 
-        $stringFilter = $this->getContainerBuilder()->addDefinition($this->prefix('archette.currencyStringFilter'))
+        $stringFilter = $this->getContainerBuilder()->addDefinition($this->prefix('currencyStringFilter'))
             ->setFactory(CurrencyStringFilter::class);
 
         $this->getContainerBuilder()->getDefinitionByType(ILatteFactory::class)
             ->addSetup('addFilter', ['currency', $stringFilter]);
 
-        $codeFilter = $this->getContainerBuilder()->addDefinition($this->prefix('archette.currencyCodeFilter'))
+        $codeFilter = $this->getContainerBuilder()->addDefinition($this->prefix('currencyCodeFilter'))
             ->setFactory(CurrencyCodeFilter::class);
 
         $this->getContainerBuilder()->getDefinitionByType(ILatteFactory::class)
             ->addSetup('addFilter', ['currencyCode', $codeFilter]);
 
-        $numberFilter = $this->getContainerBuilder()->addDefinition($this->prefix('archette.currencyNumberFilter'))
+        $numberFilter = $this->getContainerBuilder()->addDefinition($this->prefix('currencyNumberFilter'))
             ->setFactory(CurrencyNumberFilter::class);
 
         $this->getContainerBuilder()->getDefinitionByType(ILatteFactory::class)
