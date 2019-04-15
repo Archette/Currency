@@ -7,32 +7,39 @@ namespace Archette\Currency;
 use Archette\Currency\Latte\CurrencyCodeFilter;
 use Archette\Currency\Latte\CurrencyNumberFilter;
 use Archette\Currency\Latte\CurrencyStringFilter;
+use Doctrine\Common\Persistence\Mapping\Driver\AnnotationDriver;
 use Nette\Bridges\ApplicationLatte\ILatteFactory;
+use Nette\DI\CompilerExtension;
+use Nette\DI\ServiceDefinition;
+use Nette\Schema\Expect;
 use Rixafy\Currency\Command\CurrencyUpdateCommand;
 use Rixafy\Currency\CurrencyConfig;
 use Rixafy\Currency\CurrencyFacade;
 use Rixafy\Currency\CurrencyFactory;
 use Rixafy\Currency\CurrencyProvider;
 use Rixafy\Currency\CurrencyRepository;
+use Nette\Schema\Schema;
 
-class CurrencyExtension extends \Nette\DI\CompilerExtension
+class CurrencyExtension extends CompilerExtension
 {
-    private $defaults = [
-        'apiKey' => 'undefined',
-        'apiService' => 'fixer',
-        'baseCurrency' => 'EUR'
-    ];
+	public function getConfigSchema(): Schema
+	{
+		return Expect::structure([
+			'apiKey' => Expect::string(),
+			'apiService' => Expect::string(),
+			'baseCurrency' => Expect::string(),
+		]);
+	}
 
     public function beforeCompile()
     {
-        $this->getContainerBuilder()->getDefinitionByType(\Doctrine\Common\Persistence\Mapping\Driver\AnnotationDriver::class)
-            ->addSetup('addPaths', [['vendor/rixafy/currency']]);
+    	/** @var ServiceDefinition $serviceDefinition */
+        $serviceDefinition = $this->getContainerBuilder()->getDefinitionByType(AnnotationDriver::class);
+        $serviceDefinition->addSetup('addPaths', [['vendor/rixafy/currency']]);
     }
 
     public function loadConfiguration()
     {
-        $this->validateConfig($this->defaults);
-
         $this->getContainerBuilder()->addDefinition($this->prefix('currencyConfig'))
             ->setFactory(CurrencyConfig::class)
             ->addSetup('setApiKey', [$this->config['apiKey']])
@@ -57,19 +64,17 @@ class CurrencyExtension extends \Nette\DI\CompilerExtension
         $stringFilter = $this->getContainerBuilder()->addDefinition($this->prefix('currencyStringFilter'))
             ->setFactory(CurrencyStringFilter::class);
 
-        $this->getContainerBuilder()->getDefinitionByType(ILatteFactory::class)
-            ->addSetup('addFilter', ['currency', $stringFilter]);
-
         $codeFilter = $this->getContainerBuilder()->addDefinition($this->prefix('currencyCodeFilter'))
             ->setFactory(CurrencyCodeFilter::class);
-
-        $this->getContainerBuilder()->getDefinitionByType(ILatteFactory::class)
-            ->addSetup('addFilter', ['currencyCode', $codeFilter]);
 
         $numberFilter = $this->getContainerBuilder()->addDefinition($this->prefix('currencyNumberFilter'))
             ->setFactory(CurrencyNumberFilter::class);
 
-        $this->getContainerBuilder()->getDefinitionByType(ILatteFactory::class)
-            ->addSetup('addFilter', ['currencyNumber', $numberFilter]);
+		/** @var ServiceDefinition $latteFactory */
+		$latteFactory = $this->getContainerBuilder()->getDefinitionByType(ILatteFactory::class);
+
+		$latteFactory->addSetup('addFilter', ['currency', $stringFilter]);
+		$latteFactory->addSetup('addFilter', ['currencyCode', $codeFilter]);
+        $latteFactory->addSetup('addFilter', ['currencyNumber', $numberFilter]);
     }
 }
