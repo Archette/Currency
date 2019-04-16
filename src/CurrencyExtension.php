@@ -10,7 +10,7 @@ use Archette\Currency\Latte\CurrencyStringFilter;
 use Doctrine\Common\Persistence\Mapping\Driver\AnnotationDriver;
 use Nette\Bridges\ApplicationLatte\ILatteFactory;
 use Nette\DI\CompilerExtension;
-use Nette\DI\ServiceDefinition;
+use Nette\DI\Definitions\ServiceDefinition;
 use Nette\Schema\Expect;
 use Rixafy\Currency\Command\CurrencyUpdateCommand;
 use Rixafy\Currency\CurrencyConfig;
