@@ -27,8 +27,8 @@ class CurrencyExtension extends CompilerExtension
 	{
 		return Expect::structure([
 			'apiKey' => Expect::string(),
-			'apiService' => Expect::string(),
-			'baseCurrency' => Expect::string(),
+			'apiService' => Expect::string('fixer'),
+			'baseCurrency' => Expect::string('EUR'),
 		]);
 	}
 
@@ -42,10 +42,11 @@ class CurrencyExtension extends CompilerExtension
     public function loadConfiguration()
     {
         $this->getContainerBuilder()->addDefinition($this->prefix('currencyConfig'))
-            ->setFactory(CurrencyConfig::class)
-            ->addSetup('setApiKey', [$this->config['apiKey']])
-            ->addSetup('setApiService', [$this->config['apiService']])
-            ->addSetup('setBaseCurrency', [$this->config['baseCurrency']]);
+            ->setFactory(CurrencyConfig::class, [
+            	$this->config->apiKey,
+				$this->config->apiService,
+				$this->config->baseCurrency
+			]);
 
         $this->getContainerBuilder()->addDefinition($this->prefix('currencyFacade'))
             ->setFactory(CurrencyFacade::class);
@@ -56,11 +57,12 @@ class CurrencyExtension extends CompilerExtension
         $this->getContainerBuilder()->addDefinition($this->prefix('currencyFactory'))
             ->setFactory(CurrencyFactory::class);
 
-        $this->getContainerBuilder()->addDefinition($this->prefix('currencyUpdateCommand'))
-            ->setFactory(CurrencyUpdateCommand::class);
-
         $this->getContainerBuilder()->addDefinition($this->prefix('currencyProvider'))
             ->setFactory(CurrencyProvider::class);
+
+		$this->getContainerBuilder()->addDefinition($this->prefix('currencyUpdateCommand'))
+			->setFactory(CurrencyUpdateCommand::class)
+			->addTag('console.command', 'rixafy:currency:update');
 
         $stringFilter = $this->getContainerBuilder()->addDefinition($this->prefix('currencyStringFilter'))
             ->setFactory(CurrencyStringFilter::class);
