@@ -10,6 +10,7 @@ use Archette\Currency\Latte\CurrencyStringFilter;
 use Doctrine\Common\Persistence\Mapping\Driver\AnnotationDriver;
 use Nette\Bridges\ApplicationLatte\ILatteFactory;
 use Nette\DI\CompilerExtension;
+use Nette\DI\Definitions\FactoryDefinition;
 use Nette\DI\Definitions\ServiceDefinition;
 use Nette\Schema\Expect;
 use Rixafy\Currency\Command\CurrencyUpdateCommand;
@@ -70,11 +71,11 @@ class CurrencyExtension extends CompilerExtension
         $numberFilter = $this->getContainerBuilder()->addDefinition($this->prefix('currencyNumberFilter'))
             ->setFactory(CurrencyNumberFilter::class);
 
-		/** @var ServiceDefinition $latteFactory */
+		/** @var FactoryDefinition $latteFactory */
 		$latteFactory = $this->getContainerBuilder()->getDefinitionByType(ILatteFactory::class);
 
-		$latteFactory->addSetup('addFilter', ['currency', $stringFilter]);
-		$latteFactory->addSetup('addFilter', ['currencyCode', $codeFilter]);
-        $latteFactory->addSetup('addFilter', ['currencyNumber', $numberFilter]);
+		$latteFactory->getResultDefinition()->addSetup('addFilter', ['currency', $stringFilter]);
+		$latteFactory->getResultDefinition()->addSetup('addFilter', ['currencyCode', $codeFilter]);
+        $latteFactory->getResultDefinition()->addSetup('addFilter', ['currencyNumber', $numberFilter]);
     }
 }
