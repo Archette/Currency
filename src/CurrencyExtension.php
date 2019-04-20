@@ -43,9 +43,9 @@ class CurrencyExtension extends CompilerExtension
     {
         $this->getContainerBuilder()->addDefinition($this->prefix('currencyConfig'))
             ->setFactory(CurrencyConfig::class, [
-            	$this->config->apiKey,
+				$this->config->baseCurrency,
 				$this->config->apiService,
-				$this->config->baseCurrency
+				$this->config->apiKey
 			]);
 
         $this->getContainerBuilder()->addDefinition($this->prefix('currencyFacade'))
