@@ -6,6 +6,8 @@ namespace Archette\Currency\Latte;
 
 use Rixafy\Currency\CurrencyFacade;
 use Rixafy\Currency\CurrencyProvider;
+use Rixafy\Currency\Exception\CurrencyNotFoundException;
+use Rixafy\Currency\Exception\CurrencyNotProvidedException;
 
 class CurrencyNumberFilter
 {
@@ -22,11 +24,8 @@ class CurrencyNumberFilter
     }
 
     /**
-     * @param $amount
-     * @param string|null $currency
-     * @return string
-     * @throws \Rixafy\Currency\Exception\CurrencyNotFoundException
-     * @throws \Rixafy\Currency\Exception\CurrencyNotProvidedException
+     * @throws CurrencyNotFoundException
+     * @throws CurrencyNotProvidedException
      */
     public function __invoke($amount, string $currency = null)
     {
