@@ -7,7 +7,7 @@ namespace Archette\Currency;
 use Archette\Currency\Latte\CurrencyCodeFilter;
 use Archette\Currency\Latte\CurrencyNumberFilter;
 use Archette\Currency\Latte\CurrencyStringFilter;
-use Doctrine\Common\Persistence\Mapping\Driver\AnnotationDriver;
+use Doctrine\Common\Persistence\Mapping\Driver\MappingDriver;
 use Nette\Bridges\ApplicationLatte\ILatteFactory;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\FactoryDefinition;
@@ -35,7 +35,7 @@ class CurrencyExtension extends CompilerExtension
     public function beforeCompile(): void
     {
     	/** @var ServiceDefinition $serviceDefinition */
-        $serviceDefinition = $this->getContainerBuilder()->getDefinitionByType(AnnotationDriver::class);
+        $serviceDefinition = $this->getContainerBuilder()->getDefinitionByType(MappingDriver::class);
         $serviceDefinition->addSetup('addPaths', [['vendor/rixafy/currency']]);
     }
 
