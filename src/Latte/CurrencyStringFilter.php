@@ -30,7 +30,7 @@ class CurrencyStringFilter
     public function __invoke($amount, string $currency = null)
     {
         if ($currency === null) {
-            $currency = $this->currencyProvider->getCurrency();
+            $currency = $this->currencyProvider->provide();
 
         } else {
             $currency = $this->currencyFacade->getByCode($currency);
