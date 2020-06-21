@@ -39,7 +39,7 @@ class CurrencyExtension extends CompilerExtension
 				->addAnnotation('Rixafy\Currency', __DIR__ . '/../../../rixafy/currency');
 		} else {
 			/** @var ServiceDefinition $annotationDriver */
-			$annotationDriver = $this->getContainerBuilder()->getDefinitionByType(AnnotationDriver::class);
+			$annotationDriver = $this->getContainerBuilder()->getDefinitionByType(MappingDriver::class);
 			$annotationDriver->addSetup('addPaths', [['vendor/rixafy/currency']]);
 		}
     }
