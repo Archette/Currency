@@ -34,9 +34,14 @@ class CurrencyExtension extends CompilerExtension
 
     public function beforeCompile(): void
     {
-    	/** @var ServiceDefinition $serviceDefinition */
-        $serviceDefinition = $this->getContainerBuilder()->getDefinitionByType(MappingDriver::class);
-        $serviceDefinition->addSetup('addPaths', [['vendor/rixafy/currency']]);
+		if (class_exists('Nettrine\ORM\DI\Helpers\MappingHelper')) {
+			\Nettrine\ORM\DI\Helpers\MappingHelper::of($this)
+				->addAnnotation('Rixafy\Currency', __DIR__ . '/../../../rixafy/currency');
+		} else {
+			/** @var ServiceDefinition $annotationDriver */
+			$annotationDriver = $this->getContainerBuilder()->getDefinitionByType(AnnotationDriver::class);
+			$annotationDriver->addSetup('addPaths', [['vendor/rixafy/currency']]);
+		}
     }
 
     public function loadConfiguration(): void
