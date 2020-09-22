@@ -9,9 +9,11 @@
             "email": "rixafy@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
-        "rixafy/currency": "dev-master",
+        "rixafy/currency": "^1.0"
+    },
+    "require-dev": {
         "nette/di": "^3.0",
         "nette/application": "^3.0"
     },
