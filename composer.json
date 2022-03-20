@@ -11,7 +11,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "rixafy/currency": "^1.0"
+        "rixafy/currency": "^2.0"
     },
     "require-dev": {
         "nette/di": "^3.0",
